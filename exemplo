@@ -1,0 +1,53 @@
+--banco de bados
+create database rev5d
+go
+use rev5d
+--criar nova tabela
+create table categoria(
+idCat int primary key identity (1,1), --cria pk com numero com numerocao automatica
+nomeCat varchar(40) 
+)
+
+create table produto(
+idPro int primary key identity(1,1),
+nomePro varchar (70),
+daValidade date,
+preco money,
+idCar int foreign key references categoria(idCat) -- fk ligando na tabela categoria 
+)
+
+set dateformat dmy --altera o formato de data nesta conexão
+
+insert into categoria values('alimentos'),('higiene'),('limpeza')
+insert into produto values('pasta de dente','2020/01/20',4.35,2)
+
+insert into produto values ('ARROZ', '15/08/2019',13.90,1)
+
+insert into produto values ('ARROZ', '15/08/2019',13.90,1)
+
+insert into produto(nomePro,preco,idCar) values ('feijao',13.90,3)
+insert into produto values ('sabao em po',null,13.10,3)
+--alterar valor de um dado num registro especifico 
+update produto set nomePro = 'macarrao' where idPro = 4
+--altera preco
+update produto set preco = preco+ 5
+-- elimina registro da tabela
+delete produto
+where idPro < 3
+--funcao do sqlserver
+select 
+	MAX(preco) as maisCaro,
+	MIN(preco) as maisBarato,
+	SUM(preco) as somaTotal,
+	AVG(preco) as media,
+	COUNT(daValidade) as contagem
+from produto
+
+select 
+AVG(preco)as media,
+-- round aredonda
+round(avg(preco),1) as mediaAredodada
+from produto
+
+select * from produto
+
