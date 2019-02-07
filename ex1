@@ -1,0 +1,48 @@
+create database ex1 
+go 
+use ex1
+
+create table categoria(
+codCat int primary key identity(1,1),
+descrticao varchar(40),
+ativo varchar(1)
+)
+
+create table artista (
+codArt int primary key identity(1,1),
+nome varchar(20),
+nomeArtistico varchar(20),
+DtNascimento date,
+pais varchar(10)
+)
+
+create table cd (
+	codCd int primary key identity (1,1),
+	ano varchar(4),
+	titulo varchar(10),
+	codArt int foreign key references artista(codArt),
+	codCat int foreign key references categoria(codCat)
+)
+set dateformat dmy --altera o formato de data nesta conexão
+--2
+insert into artista values  ('blablablabla','blablablabla','07/02/2001','blablabla')
+insert into categoria values  ('blablablabla','s')
+--3
+insert into cd values('2016','blablabla',1,1)
+--4
+alter table cd add preco money
+select * from cd
+select * from categoria
+select * from artista
+
+--5
+update cd set preco = 13.20 where codCd <=6 
+--6
+insert into artista values  ('blablablabla','blablablabla','07/02/2019','Alemanha')
+--7 
+insert into cd values ('2019','alemArt',5,6,15.00) 
+--8
+select * from cd where codCat in (select codCat from categoria where ativo = 's')
+--9
+select * from cd where codArt in (select codArt from artista where DtNascimento >'1950-01-01' and DtNascimento<'2002-01-01')
+
