@@ -44,5 +44,12 @@ insert into cd values ('2019','alemArt',5,6,15.00)
 --8
 select * from cd where codCat in (select codCat from categoria where ativo = 's')
 --9
-select * from cd where codArt in (select codArt from artista where DtNascimento >'1950-01-01' and DtNascimento<'2002-01-01')
+update cd set preco = preco *1.1 where codCd in (select codCd from cd where (ano >'1950-01-01' and ano <'2002-12-12'))
+--10
+select * from cd where preco > (select AVG(preco) from cd)
+--11
+delete from cd where codArt in(select codArt from artista where pais = 'brasil')
+--12
+select * from cd where (ano >'2015-01-01' and ano <'2015-12-12' and codArt in (select codArt from artista where pais = 'alemanha' ) )
+
 
