@@ -140,7 +140,11 @@ insert into possui values
 	(2,4),
 	(3,5),
 	(4,6),
+	(4,7),
+	(5,8)
 	
+select * from possui
+
 dbcc checkident(banda,reseed,0)
 delete from banda
 select * from banda
